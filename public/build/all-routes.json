@@ -1,0 +1,34 @@
+{
+  "id": "/",
+  "name": "App",
+  "mtime": 1739968820377,
+  "changeFreq": "weekly",
+  "children": [
+    {
+      "id": "/contact",
+      "name": "Contact",
+      "mtime": 1739887744508,
+      "changeFreq": "weekly",
+      "level": -999,
+      "hidden": true,
+      "priority": 0.8
+    },
+    {
+      "id": "/publications",
+      "name": "Publications",
+      "mtime": 1739966927141,
+      "changeFreq": "weekly",
+      "level": 998,
+      "priority": 1
+    },
+    {
+      "id": "/research",
+      "name": "Research",
+      "mtime": 1739966932575,
+      "changeFreq": "weekly",
+      "level": 999,
+      "hidden": true,
+      "priority": 0.8
+    }
+  ]
+}

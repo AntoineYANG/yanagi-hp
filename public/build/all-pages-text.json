@@ -1,0 +1,102 @@
+[
+  {
+    "path": "/",
+    "meta": {
+      "viewport": "width=device-width, initial-scale=1",
+      "theme-color": "#fcfcfc",
+      "color-scheme": "light",
+      "description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "application-name": "Homepage",
+      "author": "Zhendong Yang",
+      "generator": "Next.js",
+      "keywords": "Zhendong Yang, Z. Yang, Shinto Yanagi, S. Yanagi, 楊振東, 楊 振東, やなぎ しんとう, ヤナギ シントウ, 杨振东",
+      "referrer": "strict-origin-when-cross-origin",
+      "robots": "index, follow",
+      "mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-title": "Zhendong Yang",
+      "apple-mobile-web-app-status-bar-style": "default",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Zhendong Yang's Homepage",
+      "twitter:description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "twitter:image": "http://localhost:9090/og.png"
+    },
+    "title": "Zhendong Yang",
+    "raw": "Zhendong Yang\nBachelor's Degree in Computer Science\nKyoto, Japan\n--\nyanagishinto  [at]  gmail.com\nZhendong Yang\nBachelor's Degree in Computer Science\nKyoto, Japan\n--\nyanagishinto  [at]  gmail.com\nBiography\nZhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.\n◆ Keywords of Research\nWireless and computer networks| optimization for intelligent networks| edge intelligence| decentralized machine learning\nPublications\nZ. Zhou, H. Wang, Zhendong Yang , Y. Chen, X. Chen, Y. Lai, GeoVoronoi: A Voronoi Diagram Generation System for Large-scale Geographical Point Data via Spatial Attribute Association, Early Access in IEEE Transactions on Big Data , 2024.\nZ. Zhou, X. Zhang, Zhendong Yang , Y. Chen, Y. Liu, J. Wen, B. Chen, Y. Zhao, W. Chen, Visual Abstraction of Geographical Point Data with Spatial Autocorrelations, 2020 IEEE Conference on Visual Analytics Science and Technology (VAST) , 2020.\n",
+    "content": "zhendong yang\nbachelor degree computer science\nkyoto japan\n\nyanagishinto gmail com\nzhendong yang\nbachelor degree computer science\nkyoto japan\n\nyanagishinto gmail com\nbiography\nzhendong yang was researcher zufe specializing data visualization focus applications data visualization geographic information system\nkeywords research\nwireless computer networks optimization intelligent networks edge intelligence decentralized machine learning\npublications\nzhou wang zhendong yang chen chen lai geovoronoi voronoi diagram generation system large scale geographical point data via spatial attribute association early access ieee transactions big data\nzhou zhang zhendong yang chen liu wen chen zhao chen visual abstraction geographical point data spatial autocorrelations ieee conference visual analytics science technology vast\n"
+  },
+  {
+    "path": "/contact",
+    "meta": {
+      "viewport": "width=device-width, initial-scale=1",
+      "theme-color": "#fcfcfc",
+      "color-scheme": "light",
+      "description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "application-name": "Homepage",
+      "author": "Zhendong Yang",
+      "generator": "Next.js",
+      "keywords": "Zhendong Yang, Z. Yang, Shinto Yanagi, S. Yanagi, 楊振東, 楊 振東, やなぎ しんとう, ヤナギ シントウ, 杨振东",
+      "referrer": "strict-origin-when-cross-origin",
+      "robots": "index, follow",
+      "mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-title": "Zhendong Yang",
+      "apple-mobile-web-app-status-bar-style": "default",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Zhendong Yang's Homepage",
+      "twitter:description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "twitter:image": "http://localhost:9090/og.png"
+    },
+    "title": "Zhendong Yang",
+    "raw": ": yanagishinto  [at]  gmail.com\n(change [at] to @)\n",
+    "content": "yanagishinto gmail com\nchange\n"
+  },
+  {
+    "path": "/publications",
+    "meta": {
+      "viewport": "width=device-width, initial-scale=1",
+      "theme-color": "#fcfcfc",
+      "color-scheme": "light",
+      "description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "application-name": "Homepage",
+      "author": "Zhendong Yang",
+      "generator": "Next.js",
+      "keywords": "Zhendong Yang, Z. Yang, Shinto Yanagi, S. Yanagi, 楊振東, 楊 振東, やなぎ しんとう, ヤナギ シントウ, 杨振东",
+      "referrer": "strict-origin-when-cross-origin",
+      "robots": "index, follow",
+      "mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-title": "Zhendong Yang",
+      "apple-mobile-web-app-status-bar-style": "default",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Zhendong Yang's Homepage",
+      "twitter:description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "twitter:image": "http://localhost:9090/og.png"
+    },
+    "title": "Zhendong Yang",
+    "raw": "Journal Papers\nZ. Zhou, H. Wang, Zhendong Yang , Y. Chen, X. Chen, Y. Lai, GeoVoronoi: A Voronoi Diagram Generation System for Large-scale Geographical Point Data via Spatial Attribute Association, Early Access in IEEE Transactions on Big Data , 2024.\nConference Papers\nZ. Zhou, X. Zhang, Zhendong Yang , Y. Chen, Y. Liu, J. Wen, B. Chen, Y. Zhao, W. Chen, Visual Abstraction of Geographical Point Data with Spatial Autocorrelations, 2020 IEEE Conference on Visual Analytics Science and Technology (VAST) , 2020.\n",
+    "content": "journal papers\nzhou wang zhendong yang chen chen lai geovoronoi voronoi diagram generation system large scale geographical point data via spatial attribute association early access ieee transactions big data\nconference papers\nzhou zhang zhendong yang chen liu wen chen zhao chen visual abstraction geographical point data spatial autocorrelations ieee conference visual analytics science technology vast\n"
+  },
+  {
+    "path": "/research",
+    "meta": {
+      "viewport": "width=device-width, initial-scale=1",
+      "theme-color": "#fcfcfc",
+      "color-scheme": "light",
+      "description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "application-name": "Homepage",
+      "author": "Zhendong Yang",
+      "generator": "Next.js",
+      "keywords": "Zhendong Yang, Z. Yang, Shinto Yanagi, S. Yanagi, 楊振東, 楊 振東, やなぎ しんとう, ヤナギ シントウ, 杨振东",
+      "referrer": "strict-origin-when-cross-origin",
+      "robots": "index, follow",
+      "mobile-web-app-capable": "yes",
+      "apple-mobile-web-app-title": "Zhendong Yang",
+      "apple-mobile-web-app-status-bar-style": "default",
+      "twitter:card": "summary_large_image",
+      "twitter:title": "Zhendong Yang's Homepage",
+      "twitter:description": "Zhendong Yang was a researcher at ZUFE specializing in data visualization, with a focus on the applications of data visualization, and geographic information system.",
+      "twitter:image": "http://localhost:9090/og.png"
+    },
+    "title": "Zhendong Yang",
+    "raw": "Edit /app/research/page.mdx  to implement this page.\n",
+    "content": "edit app research page mdx implement this page\n"
+  }
+]
