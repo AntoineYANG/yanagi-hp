@@ -1,0 +1,50 @@
+import Balancer from "react-wrap-balancer";
+
+import { AsideStart } from "@cp/layout-body";
+import Splitter from "@cp/splitter";
+
+import aside from "./aside";
+
+{/* We use a different aside element here to prevent from large contents shifting by using <AsideStart> in vertical layout */}
+
+<AsideStart>
+  <div className="hidden xl:contents">
+    {aside}
+  </div>
+</AsideStart>
+<div className="xl:hidden -mx-14 -mt-8 mb-8">
+  {aside}
+</div>
+
+
+## Bio
+
+Zhendong Yang graduated with a Bachelor's degree in Software Engineering from ZUFE, China, specializing in computer science.
+During his time at ZUFE, he delved into data visualization research, particularly in collaboration with the GIS (Geographic Information Systems) field.
+He participated in several research projects, achieving notable results in his area of study.
+
+As a front-end engineer, Zhendong Yang is deeply passionate about creating impactful, user-friendly web applications.
+In 2021, he had the opportunity to complete a six-month internship at ByteDance Ltd,
+where he worked on a variety of projects, further fueling his enthusiasm for front-end development. 
+Recently, Zhendong Yang has contributed to multiple open-source projects,
+some of which have garnered over 4k stars on GitHub,
+reflecting his dedication to sharing knowledge and improving the development community.
+
+Currently, Zhendong Yang is preparing to embark on a new chapter of his research career in Japan,
+where he aims to continue making meaningful contributions to new fields.
+
+
+<h3><span aria-hidden="true" className="inline-block px-1 select-none">{String.fromCodePoint(0x25c6)}</span>Keywords of Research</h3>
+
+<Balancer ratio={1} as="p" className="my-6 text-gray-900 leading-8">
+  <span className="portrait:whitespace-nowrap">Data Visualization<Splitter />Front-end Engineering<Splitter />Natural Language Processing</span>
+</Balancer>
+
+## Publications
+
+import publications from "@constant/publications";
+import PublicationList from "@cp/publication-list";
+
+<PublicationList publications={publications.Journal_Papers.concat(publications.Conference_Papers)} limit={5} rich={false} />
+
+[Check details](/publications)

@@ -1,0 +1,12 @@
+.header-box {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+}
+
+.header-box .spring {
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+  pointer-events: none;
+}

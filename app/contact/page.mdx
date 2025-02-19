@@ -1,0 +1,9 @@
+import { PageTitle } from "@cp/layout-body";
+
+<PageTitle>Contact</PageTitle>
+
+import profileData from "@constant/profile.json";
+import InlineEmail from "@cp/inline-email.client";
+
+
+- **Email**: <InlineEmail value={profileData.email} /> _(change \[at\] to @)_
