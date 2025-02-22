@@ -28,24 +28,24 @@ const LayoutBody: FC<PropsWithChildren> = ({ children }) => {
   
   return (
     <PageContext.Provider value={pageCtx}>
-      <div className="flex xl:flex-row flex-col">
-        <aside className="flex-1 xl:pl-16 overflow-hidden">
+      <div className="flex xl:flex-row flex-col min-h-[calc(90vh-12rem)]">
+        <aside className="xl:flex-1 xl:pl-16 overflow-hidden">
           <div className="w-full text-center relative">
             {asideStart}
           </div>
         </aside>
-        <main className="flex-none px-14 mb-32">
+        <main className="flex-none px-8 mb-32">
           <article className="mx-auto mt-8 xl:mt-0 landscape:w-[800px] xl:!w-[calc(377.6px+33vw)] xl:pt-8">
-            {title ? (
+            {title && (
               <>
                 <h1 className="landscape:sr-only text-foreground font-bold text-4xl">{title}</h1>
                 <hr className="landscape:hidden my-6" />
               </>
-            ) : null}
+            )}
             {children}
           </article>
         </main>
-        <aside className="flex-1 xl:pr-16 overflow-hidden">
+        <aside className="xl:flex-1 xl:pr-16 overflow-hidden">
           <div className="w-full text-center relative">
             {asideEnd}
           </div>

@@ -1,5 +1,5 @@
 import { black, white } from "@/tailwind.config";
-import { Klee_One, Sometype_Mono } from "next/font/google";
+import { Klee_One, LXGW_WenKai_Mono_TC, Sometype_Mono, Waiting_for_the_Sunrise } from "next/font/google";
 
 
 const kleeOne = Klee_One({
@@ -14,9 +14,23 @@ const sometypeMono = Sometype_Mono({
   subsets: ["latin", "latin-ext"],
 });
 
+const waitingForTheSunrise = Waiting_for_the_Sunrise({
+  variable: "--font-waiting-for-the-sunrise",
+  weight: ["400"],
+  subsets: ["latin", "latin-ext"],
+});
+
+const LXGWMono = LXGW_WenKai_Mono_TC({
+  variable: "--font-lxgw-wentai-mono-tc",
+  weight: ["300", "400", "700"],
+  subsets: ["latin", "latin-ext", "cyrillic", "cyrillic-ext"],
+});
+
 export const font = {
   kleeOne,
   sometypeMono,
+  waitingForTheSunrise,
+  LXGWMono,
 };
 
 export const globalTheme = {

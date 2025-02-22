@@ -132,8 +132,7 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
     <div className="fixed top-0 left-0 right-0 z-30">
       {/* Nav bar */}
       <header
-        className={`w-full pl-2 flex flex-row items-center justify-stretch text-lg text-foreground
-          ${font.sometypeMono.className} whitespace-nowrap relative
+        className={`w-full pl-2 flex flex-row items-center justify-stretch text-lg text-foreground whitespace-nowrap relative
           ${transparentAtTop && atTop ? 'bg-transparent' : 'bg-background'} transition-colors duration-300
         `}
         style={reverse ? {
@@ -164,14 +163,14 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
         <div className="h-full header-box landscape:ml-4 py-2 landscape:py-4 pr-2 flex flex-row items-center overflow-hidden">
           <div className="grow-0 shrink min-w-8 text-left text-2xl overflow-hidden text-ellipsis">
             <Link href="/">
-              <span className="capitalize select-none">
+              <span className={`capitalize select-none ${font.waitingForTheSunrise.className}`}>
                 {homeLabel}
               </span>
             </Link>
           </div>
           <div className="spring min-w-6" aria-hidden="true" />
           <nav className="grow-0 shrink-[4] text-right overflow-hidden relative z-0" ref={navBoxRef}>
-            <ul className="m-0 p-0 list-none h-full space-x-1 overflow-x-scroll scroll-style-none portrait:hidden">
+            <ul className={`${font.LXGWMono.className} m-0 p-0 list-none h-full space-x-1 overflow-x-scroll scroll-style-none portrait:hidden`}>
               {
                 navItems.map((item, i) => {
                   const isCur = item.url === pathname;
@@ -259,7 +258,7 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
         role="presentation"
         onClick={menuOpen ? onClickMenuButton : undefined}
       />
-      <div className={`landscape:hidden ${menuOpen ? 'translate-x-0' : '-translate-x-full pointer-events-none'} transition-transform shadow-md fixed z-50 left-0 top-0 bottom-0 bg-background h-full min-w-[33vw] max-w-[55vw] p-2 flex flex-col items-center justify-stretch text-lg ${font.sometypeMono.className} whitespace-nowrap`}>
+      <div className={`landscape:hidden ${menuOpen ? 'translate-x-0' : '-translate-x-full pointer-events-none'} transition-transform shadow-md fixed z-50 left-0 top-0 bottom-0 bg-background h-full min-w-[33vw] max-w-[55vw] p-2 flex flex-col items-center justify-stretch text-lg ${font.LXGWMono.className} whitespace-nowrap`}>
         <div className="flex-none w-full flex flex-col">
           <div className="flex-none mr-2 w-[2.2em] flex overflow-hidden">
             <Button

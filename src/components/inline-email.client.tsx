@@ -171,7 +171,7 @@ const InlineEmail: FC<IInlineEmailProps> = ({ value, replacer }) => {
           onMouseOver={handleMouseOverBox}
           onMouseOut={handleMouseOutBox}
         >
-          <div className={`relative ${font.sometypeMono.className} bg-gray-100 rounded-sm px-1 text-sm font-thin`}>
+          <div className={`relative ${font.sometypeMono.className} bg-gray-100 rounded-sm px-1 text-sm font-thin whitespace-nowrap`}>
             <blockquote aria-hidden className="relative px-1">
               {left}
               <span className="select-none">{" "}</span>

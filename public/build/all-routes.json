@@ -1,9 +1,17 @@
 {
   "id": "/",
   "name": "App",
-  "mtime": 1739968820377,
+  "mtime": 1740204843235,
   "changeFreq": "weekly",
   "children": [
+    {
+      "id": "/about",
+      "name": "About Me",
+      "mtime": 1739971457453,
+      "changeFreq": "weekly",
+      "level": 999,
+      "priority": 1
+    },
     {
       "id": "/contact",
       "name": "Contact",
@@ -26,7 +34,7 @@
       "name": "Research",
       "mtime": 1739966932575,
       "changeFreq": "weekly",
-      "level": 999,
+      "level": 0,
       "hidden": true,
       "priority": 0.8
     }

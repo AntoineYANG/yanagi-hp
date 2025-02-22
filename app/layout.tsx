@@ -80,7 +80,7 @@ export const viewport: Viewport = {
 const Layout: FC<PropsWithChildren> = ({ children }) => (
   <html lang="en" className="scroll-style-none">
     <body
-      className={`${font.kleeOne.className} antialiased w-screen min-h-screen overflow-x-hidden overflow-y-scroll bg-background text-foreground scroll-style-none`}
+      className={`${font.kleeOne.className} antialiased w-screen min-h-[calc(100vh-4rem)] overflow-x-hidden overflow-y-scroll bg-background text-foreground scroll-style-none`}
       style={{
         // @ts-expect-error css variables
         '--background': globalTheme.background,
@@ -88,7 +88,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => (
       }}
       id="body"
     >
-      <NavBar homeLabel={profileData.fullName} />
+      <NavBar homeLabel={siteData.title} />
       <div className="relative w-full h-full mt-16 mb-0 overflow-hidden py-0">
         <div className="w-full overflow-x-hidden" id="main">
           <LayoutBody>

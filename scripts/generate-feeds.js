@@ -43,7 +43,7 @@ function recurse(dir, cb) {
         cb(data);
       } else if (name === "meta.json") {
         try {
-          const { level, hidden, description = "", priority, changeFreq = "weekly" } = JSON.parse(readFileSync(fn, { encoding: 'utf-8' }));
+          const { level, hidden, description = "", priority, changeFreq = "weekly", name = "" } = JSON.parse(readFileSync(fn, { encoding: 'utf-8' }));
           if (typeof level === 'number') {
             data.level = level;
           }
@@ -52,6 +52,9 @@ function recurse(dir, cb) {
           }
           if (description) {
             data.description = description;
+          }
+          if (name) {
+            data.name = name;
           }
           data.changeFreq = changeFreq;
           const isTopLevel = data.id.split('/').length === 2;

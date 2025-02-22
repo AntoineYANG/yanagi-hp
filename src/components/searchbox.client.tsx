@@ -33,6 +33,9 @@ const Searchbox: FC = () => {
       }
     };
   }, []);
+  useEffect(() => {
+    setSearchboxOpen(false);
+  }, [pathname]);
   const onClickOpenSearchboxButton = useCallback(() => {
     setSearchboxOpen(true);
     setAniBusy(true);
@@ -74,9 +77,11 @@ const Searchbox: FC = () => {
   }, [search]);
 
   const inputRef = useRef<HTMLInputElement>(null);
+  const inputPrtRef = useRef<HTMLInputElement>(null);
   useEffect(() => {
     if (searchboxOpen) {
       inputRef.current?.focus();
+      inputPrtRef.current?.focus();
     }
   }, [searchboxOpen]);
 
@@ -122,10 +127,38 @@ const Searchbox: FC = () => {
     }
   }, [ac, query, queryValid]);
 
+  const acElement = (
+    <>
+      {autocomplete === "loading" && (
+        <div className="flex-none flex gap-1">
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-blue-600 saturate-[52%]"></div>
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-blue-600 saturate-[56%]"></div>
+          <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-blue-600 saturate-[60%]"></div>
+        </div>
+      )}
+      {autocomplete && typeof autocomplete === "object" && (
+        <div className="w-full h-full flex-1 text-sm pb-4">
+          <ol className="max-h-60 overflow-x-hidden overflow-y-auto scroll-style-none portrait:divide-y">
+            {autocomplete.result.match.map((res, i) => (
+              <li key={i} className={res.id === pathname ? 'hidden' : ''}>
+                <Link href={res.id} className="block px-2 landscape:px-4 py-3 opacity-90 hover:opacity-100 focus-within:opacity-100 hover:bg-gray-400/10 focus:bg-gray-400/10">
+                  <div className="pointer-events-none !space-y-0.5">
+                    <p className="font-semibold capitalize">{res.title}</p>
+                    <p className="font-thin text-[96%] !leading-5 line-clamp-3">{res.preview}</p>
+                  </div>
+                </Link>
+              </li>
+            ))}
+          </ol>
+        </div>
+      )}
+    </>
+  )
+
   return (
     <div className="px-1 flex items-center justify-center">
       <div
-        className={`${searchboxOpen ? 'w-96 max-w-[60vw] opacity-100' : 'w-0 opacity-0 pointer-events-none'} transition-all duration-300 flex relative`}
+        className={`portrait:hidden ${searchboxOpen ? 'w-96 max-w-[60vw] opacity-100' : 'w-0 opacity-0 pointer-events-none'} transition-all duration-300 flex relative`}
       >
         <input
           aria-label="Searchbox"
@@ -157,36 +190,14 @@ const Searchbox: FC = () => {
         </div>
         {Boolean(autocomplete) && mounted && Boolean(portalContainerRef.current) && acW > 0 && createPortal((
           <div
-            className="z-40 fixed min-h-32 bg-background text-foreground/80 backdrop-blur-3xl shadow-lg rounded border-dashed border border-foreground/60 flex flex-col items-center justify-center"
+            className="portrait:hidden z-40 fixed min-h-32 bg-background text-foreground/80 backdrop-blur-3xl shadow-lg rounded border-dashed border border-foreground/60 flex flex-col items-center justify-center"
             style={{
               left: `${acX}px`,
               top: `${acY}px`,
               width: `${acW}px`,
             }}
           >
-            {autocomplete === "loading" && (
-              <div className="flex-none flex gap-1">
-                <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-blue-600 saturate-[52%]"></div>
-                <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-blue-600 saturate-[56%]"></div>
-                <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-blue-600 saturate-[60%]"></div>
-              </div>
-            )}
-            {autocomplete && typeof autocomplete === "object" && (
-              <div className="w-full h-full flex-1 text-sm pb-4">
-                <ol className="max-h-60 overflow-x-hidden overflow-y-auto scroll-style-none">
-                  {autocomplete.result.match.map((res, i) => (
-                    <li key={i} className={res.id === pathname ? 'hidden' : ''}>
-                      <Link href={res.id} className="block px-4 py-3 opacity-90 hover:opacity-100 focus-within:opacity-100 hover:bg-gray-400/10 focus:bg-gray-400/10">
-                        <div className="pointer-events-none !space-y-0.5">
-                          <p className="font-semibold capitalize">{res.title}</p>
-                          <p className="font-thin text-[96%] !leading-5 line-clamp-3">{res.preview}</p>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            )}
+            {acElement}
           </div>
         ), portalContainerRef.current!)}
       </div>
@@ -218,6 +229,47 @@ const Searchbox: FC = () => {
           className="m-2 pointer-events-none select-none"
         />
       </Button>
+      {mounted && Boolean(portalContainerRef.current) && createPortal((
+        <>
+          <div
+            className={`landscape:hidden fixed z-50 inset-0 bg-black ${searchboxOpen ? 'opacity-50' : 'opacity-0 pointer-events-none'} transition-opacity`}
+            aria-hidden
+            role="presentation"
+            onClick={onClickCloseSearchboxButton}
+          />
+          <div className={`landscape:hidden ${searchboxOpen ? '' : 'hidden pointer-events-none'} shadow-lg rounded fixed z-50 left-[50vw] top-[50vh] -translate-x-1/2 -translate-y-1/2 bg-background p-8 w-[calc(96vw-4rem)] max-w-[480px] h-[50vh] flex flex-col items-center justify-stretch space-y-4`}>
+            <div className="flex-0 w-full flex items-center">
+              <input
+                aria-label="Searchbox"
+                className={`flex-1 border border-gray-500 rounded-sm px-2 py-1 min-w-0 text-base ${font.sometypeMono.className}`}
+                onKeyDown={handleSearchboxKeyDown}
+                value={sbValue}
+                placeholder="Search in the site..."
+                onChange={ev => setSbValue(ev.target.value)}
+                ref={inputPrtRef}
+              />
+              <div className="flex-none z-10 flex items-center justify-center">
+                <Button
+                  className="flex-none inline-block cursor-pointer mr-0 group rounded-full overflow-hidden"
+                  aria-label="next"
+                  onTrigger={search}
+                >
+                  <MagnifyingGlassIcon
+                    width="1.2em" height="1.2em"
+                    stroke="currentColor"
+                    role="presentation"
+                    aria-hidden="true"
+                    className="m-1 ml-2 pointer-events-none select-none opacity-75 group-hover:opacity-100 group-focus:opacity-100"
+                  />
+                </Button>
+              </div>
+            </div>
+            <div className="flex-1 w-full flex flex-col items-center justify-center">
+              {acElement}
+            </div>
+          </div>
+        </>
+      ), portalContainerRef.current!)}
     </div>
   );
 };
