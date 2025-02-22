@@ -12,6 +12,8 @@ export interface ISearchResult {
   query: string;
   keywords: string[];
   match: ISearchEntry[];
+  count: number;
+  pageSize: number;
 }
 
 const stopWords = ["the", "and", "of", "in", "a", "to", "for", "on", "with", "as"];
@@ -26,9 +28,12 @@ const preprocess = (raw: string) => {
 const PREVIEW_LEN = 200;
 const TITLE_WEIGHT = 256;
 
+const PAGE_SIZE = 20;
+
 export const GET = async (request: NextRequest): Promise<Response> => {
   const searchParams = request.nextUrl.searchParams;
   const query = searchParams.get('query');
+  const page = Number(searchParams.get('page')) || 0;
 
   if (!query) {
     return new Response(
@@ -51,6 +56,8 @@ export const GET = async (request: NextRequest): Promise<Response> => {
     query,
     keywords: kw,
     match: [],
+    count: 0,
+    pageSize: PAGE_SIZE,
   };
 
   for (const doc of data) {
@@ -102,7 +109,8 @@ export const GET = async (request: NextRequest): Promise<Response> => {
     }
   }
 
-  result.match.sort((a, b) => b.score - a.score);
+  result.count = result.match.length;
+  result.match = result.match.toSorted((a, b) => b.score - a.score).slice(PAGE_SIZE * page, PAGE_SIZE * (page + 1));
 
   return new Response(
     JSON.stringify(result),

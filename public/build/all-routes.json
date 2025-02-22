@@ -37,6 +37,15 @@
       "level": 0,
       "hidden": true,
       "priority": 0.8
+    },
+    {
+      "id": "/search",
+      "name": "Search Result",
+      "mtime": 1740211485137,
+      "changeFreq": "weekly",
+      "level": 0,
+      "hidden": true,
+      "priority": 0.8
     }
   ]
 }

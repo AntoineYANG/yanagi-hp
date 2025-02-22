@@ -25,6 +25,7 @@
       "@articles/*": ["./src/articles/*"],
       "@cp/*": ["./src/components/*"],
       "@utils/*": ["./src/utils/*"],
+      "@api/*": ["./app/api/*"],
       "@pb/*": ["./public/*"],
       "@img/*": ["./public/images/*"]
     }

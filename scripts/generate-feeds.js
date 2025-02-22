@@ -136,6 +136,7 @@ function generateRobotsTxt(baseUrl) {
   const content = `User-agent: *
 Disallow: /admin/
 Disallow: /search?
+Disallow: /api/
 Disallow: /tmp/
 Disallow: /*?*
 Allow: /public/
