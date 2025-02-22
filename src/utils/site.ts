@@ -8,33 +8,41 @@ export interface LinkItem {
   url: string;
 }
 
+export interface INavItemList {
+  common: LinkItem[];
+  blogs: LinkItem[];
+}
+
 export interface RouteNode {
+  mode: "common" | "blogs";
   id: string;
   name: string;
   description: string;
   mtime: number;
   changeFreq: "daily" | "weekly" | "monthly";
   priority: number;
+  container: string;
   children?: RouteNode[];
   level?: number;
   hidden?: boolean;
 }
 
-export const getTopPaths = (): LinkItem[] => {
-  const list: LinkItem[] = [];
+export const getNavItems = (): INavItemList => {
+  const common: LinkItem[] = [];
+  const blogs: LinkItem[] = [];
 
   if (allRoutes.id === '/') {
-    list.push({
+    common.push({
       label: "Home",
       url: "/",
     });
 
     if (allRoutes.children) {
-      const children = allRoutes.children.slice();
-      children.sort((a, b) => (b.level ?? 0) - (a.level ?? 0));
-      for (const item of children) {
+      const links = allRoutes.children.filter(e => e.mode === "common");
+      links.sort((a, b) => (b.level ?? 0) - (a.level ?? 0));
+      for (const item of links) {
         if (!item.hidden) {
-          list.push({
+          common.push({
             label: item.name,
             url: item.id,
           });
@@ -43,5 +51,17 @@ export const getTopPaths = (): LinkItem[] => {
     }
   }
 
-  return list;
+  const b = allRoutes.children?.filter(e => e.mode === "blogs") ?? [];
+  b.sort((a, b) => (b.level ?? 0) - (a.level ?? 0));
+  for (const item of b) {
+    blogs.push({
+      label: item.name,
+      url: item.id,
+    });
+  }
+
+  return {
+    common,
+    blogs,
+  };
 };

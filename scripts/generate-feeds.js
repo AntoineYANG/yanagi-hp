@@ -15,6 +15,9 @@ const jsonFileName = path.resolve(outputDir, 'all-routes.json');
 
 const siteData = require("../src/constant/site.json");
 
+/** @type {Array<import('../src/utils/site').RouteNode} */
+const containers = [];
+
 /**
  * @param {string} dir 
  * @param {(item: import('../src/utils/site').RouteNode) => void} cb 
@@ -27,8 +30,16 @@ function recurse(dir, cb) {
     name: seg[seg.length - 1],
     mtime: NaN,
     changeFreq: "weekly",
+    mode: "common",
+    container: "/",
   };
   data.name = data.name.slice(0, 1).toUpperCase() + data.name.slice(1);
+  for (const container of containers) {
+    if (data.id.startsWith(container.id + "/")) {
+      data.mode = container.mode;
+      data.container = container.id + "/";
+    }
+  }
   const ls = readdirSync(dir);
   for (const name of ls) {
     const fn = path.resolve(dir, name);
@@ -43,7 +54,7 @@ function recurse(dir, cb) {
         cb(data);
       } else if (name === "meta.json") {
         try {
-          const { level, hidden, description = "", priority, changeFreq = "weekly", name = "" } = JSON.parse(readFileSync(fn, { encoding: 'utf-8' }));
+          const { level, hidden, description = "", priority, changeFreq = "weekly", name = "", template = "common" } = JSON.parse(readFileSync(fn, { encoding: 'utf-8' }));
           if (typeof level === 'number') {
             data.level = level;
           }
@@ -55,6 +66,11 @@ function recurse(dir, cb) {
           }
           if (name) {
             data.name = name;
+          }
+          if (template !== "common") {
+            data.mode = template;
+            data.container = data.id;
+            containers.push(data);
           }
           data.changeFreq = changeFreq;
           const isTopLevel = data.id.split('/').length === 2;

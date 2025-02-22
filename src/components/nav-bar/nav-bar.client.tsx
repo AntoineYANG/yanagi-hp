@@ -1,12 +1,12 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState, type FC } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState, type FC } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { Bars3Icon, ChevronLeftIcon, ChevronRightIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
-import type { LinkItem } from "@utils/site";
+import type { INavItemList } from "@utils/site";
 import Button from "@cp/button.client";
 import ArticleProgress from "@cp/article-progress.client";
 import Searchbox from "@cp/searchbox.client";
@@ -16,7 +16,7 @@ import "./nav-bar.css";
 
 
 interface INavBarPrvProps {
-  navItems: LinkItem[];
+  navItems: INavItemList;
   homeLabel: string;
   reverseTheme?: boolean;
   transparentAtTop?: boolean;
@@ -128,6 +128,10 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
 
   const reverse = reverseTheme !== (transparentAtTop && reverseTransparentTheme && atTop);
 
+  const curApp = useMemo(() => {
+    return navItems.blogs.find(cont => pathname.startsWith(cont.url));
+  }, [navItems, pathname]);
+
   return (
     <div className="fixed top-0 left-0 right-0 z-30">
       {/* Nav bar */}
@@ -162,8 +166,15 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
         </div>
         <div className="h-full header-box landscape:ml-4 py-2 landscape:py-4 pr-2 flex flex-row items-center overflow-hidden">
           <div className="grow-0 shrink min-w-8 text-left text-2xl overflow-hidden text-ellipsis">
-            <Link href="/">
-              <span className={`capitalize select-none ${font.waitingForTheSunrise.className}`}>
+            {curApp && (
+              <Link href={curApp.url} className="outline-none hover:opacity-75 focus:opacity-75 mr-2">
+                <span className={`uppercase select-none ${font.waitingForTheSunrise.className}`}>
+                  {curApp.label}
+                </span>
+              </Link>
+            )}
+            <Link href="/" className="outline-none hover:opacity-75 focus:opacity-75">
+              <span className={`uppercase select-none ${curApp ? 'text-[70%] italic opacity-80 px-2' : ''} ${font.waitingForTheSunrise.className}`}>
                 {homeLabel}
               </span>
             </Link>
@@ -172,9 +183,8 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
           <nav className="grow-0 shrink-[4] text-right overflow-hidden relative z-0" ref={navBoxRef}>
             <ul className={`${font.LXGWMono.className} m-0 p-0 list-none h-full space-x-1 overflow-x-scroll scroll-style-none portrait:hidden`}>
               {
-                navItems.map((item, i) => {
+                Boolean(curApp) || navItems.common.map((item, i) => {
                   const isCur = item.url === pathname;
-
                   return (
                     <li
                       key={`${item.label}~${i}`}
@@ -192,6 +202,25 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
                         } : undefined}
                       >
                         <span className="capitalize select-none">
+                          {item.label}
+                        </span>
+                      </Link>
+                    </li>
+                  );
+                })
+              }
+              {
+                navItems.blogs.length > 0 && navItems.blogs.map((item, i) => {
+                  return (
+                    <li
+                      key={`${item.label}~${i}`}
+                      className="inline-flex h-full text-center items-center justify-center"
+                    >
+                      <Link
+                        href={item.url}
+                        className="flex-none px-3 outline-none hover:opacity-75 focus:opacity-75 after-line"
+                      >
+                        <span className="capitalize italic font-semibold select-none">
                           {item.label}
                         </span>
                       </Link>
@@ -280,9 +309,11 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
           <nav className="flex-1 text-left overflow-hidden mt-6">
             <ul className="m-0 p-0 list-none w-full space-y-4 overflow-hidden scroll-style-none flex flex-col mr-6 animation-group">
               {
-                menuOpen && navItems.map((item, i) => {
+                menuOpen && navItems.common.map((item, i) => {
                   const isCur = item.url === pathname;
-
+                  if (item.url !== "/" && curApp) {
+                    return null;
+                  }
                   return (
                     <li
                       key={`${item.label}~${i}`}
@@ -308,6 +339,32 @@ const NavBarPrv: FC<INavBarPrvProps> = ({ navItems, homeLabel, reverseTheme = fa
                 })
               }
             </ul>
+            {navItems.blogs.length > 0 && (
+              <>
+                <hr className="border-dashed border-gray-500 my-6" />
+                <ul className="m-0 p-0 list-none w-full space-y-4 overflow-hidden scroll-style-none flex flex-col mr-6 animation-group">
+                  {
+                    menuOpen && navItems.blogs.map((item, i) => {
+                      return (
+                        <li
+                          key={`${item.label}~${i}`}
+                          className="inline-flex w-full text-left slide-in-left font-semibold italic"
+                        >
+                          <Link
+                            href={item.url}
+                            className="flex-none px-3 outline-none hover:opacity-75 focus:opacity-75"
+                          >
+                            <span className="capitalize italic select-none">
+                              {item.label}
+                            </span>
+                          </Link>
+                        </li>
+                      );
+                    })
+                  }
+                </ul>
+              </>
+            )}
           </nav>
         </div>
       </div>
