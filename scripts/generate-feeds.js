@@ -26,9 +26,10 @@ function recurse(dir, cb) {
   const seg = dir.split(path.sep);
   /** @type {import('../src/utils/site').RouteNode} */
   const data = {
+    valid: false,
     id: `/${path.relative(appDir, dir).replaceAll(/\\/g, '/')}`,
     name: seg[seg.length - 1],
-    mtime: NaN,
+    mtime: 0,
     changeFreq: "weekly",
     mode: "common",
     container: "/",
@@ -38,20 +39,52 @@ function recurse(dir, cb) {
     if (data.id.startsWith(container.id + "/")) {
       data.mode = container.mode;
       data.container = container.id + "/";
+      break;
     }
   }
   const ls = readdirSync(dir);
   for (const name of ls) {
+    if (["api", "search", "author", "tag"].includes(name)) {
+      continue;
+    }
     const fn = path.resolve(dir, name);
     const stat = statSync(fn);
+    let inserted = false;
     if (stat.isDirectory()) {
       recurse(fn, item => {
-        data.children = (data.children || []).concat([item]);
+        data.children ??= [];
+        if (!data.children.find(c => c.id === item.id)) {
+          data.children.push(item);
+        }
       });
     } else {
       if (name.match(/^page\.(tsx|jsx?|mdx?)$/)) {
-        data.mtime = stat.mtime.valueOf();
-        cb(data);
+        if (data.mode === "blogs" && seg.at(-1) === "[id]") {
+          const target = path.join(baseDir, 'src', ...data.container.split('/').filter(Boolean));
+          const ls = readdirSync(target);
+          for (const name of ls) {
+            const fn = path.resolve(target, name);
+            const stat = statSync(fn);
+            if (stat.isFile()) {
+              if (name.match(/^.+\.md$/)) {
+                const postId = name.replace(/\.md$/, '');
+                const post = {
+                  ...data,
+                  valid: true,
+                  name: postId,
+                  id: data.id.replace(/\[id\]$/, postId),
+                  mtime: stat.mtime.valueOf(),
+                };
+                cb(post);
+              }
+            }
+          }
+        } else {
+          data.valid = true;
+          data.mtime = stat.mtime.valueOf();
+          cb(data);
+          inserted = true;
+        }
       } else if (name === "meta.json") {
         try {
           const { level, hidden, description = "", priority, changeFreq = "weekly", name = "", template = "common" } = JSON.parse(readFileSync(fn, { encoding: 'utf-8' }));
@@ -69,7 +102,7 @@ function recurse(dir, cb) {
           }
           if (template !== "common") {
             data.mode = template;
-            data.container = data.id;
+            data.container = data.id + "/";
             containers.push(data);
           }
           data.changeFreq = changeFreq;
@@ -79,6 +112,9 @@ function recurse(dir, cb) {
           console.error(error);
         }
       }
+    }
+    if (data.id !== "/" && !inserted && data.children?.length) {
+      cb(data);
     }
   }
 }

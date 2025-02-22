@@ -41,8 +41,9 @@ const Pagination: FC<IPaginationProps> = ({ total, current, onChange }) => {
     <div className={`w-full border-t-[1.2px] border-gray-400 ${font.sometypeMono.className} mt-16`}>
       <div className="flex items-stretch w-full text-gray-700 mt-8 h-[2em]">
         <Button
-          className={`cursor-pointer opacity-80 focus:opacity-100 hover:opacity-100 focus:bg-gray-600/5 hover:bg-gray-600/5`}
+          className={`${current > 0 ? 'cursor-pointer opacity-80 focus:opacity-100 hover:opacity-100 focus:bg-gray-600/5 hover:bg-gray-600/5' : 'opacity-50'}`}
           aria-label="Previous Page"
+          disabled={current < 1}
           onTrigger={() => onChange(router, current - 1)}
         >
           <ChevronLeftIcon
@@ -80,8 +81,9 @@ const Pagination: FC<IPaginationProps> = ({ total, current, onChange }) => {
           }
         })}
         <Button
-          className={`cursor-pointer opacity-80 focus:opacity-100 hover:opacity-100 focus:bg-gray-600/5 hover:bg-gray-600/5`}
+          className={`${current < total - 1 ? 'cursor-pointer opacity-80 focus:opacity-100 hover:opacity-100 focus:bg-gray-600/5 hover:bg-gray-600/5' : 'opacity-50'}`}
           aria-label="Next Page"
+          disabled={current >= total - 1}
           onTrigger={() => onChange(router, current + 1)}
         >
           <ChevronRightIcon

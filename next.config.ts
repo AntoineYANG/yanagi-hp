@@ -53,6 +53,10 @@ const nextConfig: NextConfig = {
             });
           },
         });
+        config.watchOptions = {
+          ...config.watchOptions,
+          ignored: /public\/build\/.*/,
+        };
       } else {
         config.plugins.push({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any

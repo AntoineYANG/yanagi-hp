@@ -14,6 +14,7 @@ export interface ISearchResult {
   match: ISearchEntry[];
   count: number;
   pageSize: number;
+  page: number;
 }
 
 const stopWords = ["the", "and", "of", "in", "a", "to", "for", "on", "with", "as"];
@@ -58,6 +59,7 @@ export const GET = async (request: NextRequest): Promise<Response> => {
     match: [],
     count: 0,
     pageSize: PAGE_SIZE,
+    page,
   };
 
   for (const doc of data) {

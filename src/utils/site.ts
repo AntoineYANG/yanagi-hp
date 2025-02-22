@@ -14,6 +14,7 @@ export interface INavItemList {
 }
 
 export interface RouteNode {
+  valid: boolean;
   mode: "common" | "blogs";
   id: string;
   name: string;

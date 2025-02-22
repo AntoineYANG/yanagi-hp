@@ -29,7 +29,7 @@ const ResultList: FC<{ page: number; query: string; data: ISearchResult }> = ({ 
       </div>
       <div className="flex-none w-full text-lg text-center">
         <Pagination
-          total={Math.floor(total / data.pageSize)}
+          total={Math.ceil(total / data.pageSize)}
           current={page}
           onChange={(router, val) => router.push(`/search?query=${encodeURIComponent(query)}&page=${encodeURIComponent(val)}`)}
         />

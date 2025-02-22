@@ -65,7 +65,7 @@ async function extractAllPagesText() {
   const list = [];
 
   for (const page of pages) {
-    if (page.hidden) {
+    if (page.hidden || !page.valid) {
       continue;
     }
     const pageUrl = `${baseUrl}${page.id}`;
